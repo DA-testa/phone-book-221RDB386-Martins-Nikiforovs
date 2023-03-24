@@ -45,3 +45,4 @@ def process_queries(queries):
 if __name__ == '__main__':
     write_responses(process_queries(read_queries()))
 
+   # 221RDB386 Mārtiņš Nikiforovs 11.grupa
