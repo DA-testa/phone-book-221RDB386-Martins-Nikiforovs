@@ -1,47 +1,61 @@
 # python3
+# 221RDB386 Mārtiņš Nikiforovs 11.grupa
 
-class Query:
-    def __init__(self, query):
-        self.type = query[0]
-        self.number = int(query[1])
-        if self.type == 'add':
-            self.name = query[2]
+#class Query:
+#    def __init__(self, query):
+#        self.type = query[0];
+#        self.number = int(query[1]);
+#        self.name = query[2] if self.type == 'add' else None
 
-def read_queries():
-    n = int(input())
-    return [Query(input().split()) for i in range(n)]
 
-def write_responses(result):
-    print('\n'.join(result))
 
-def process_queries(queries):
-    result = []
-    # Keep list of all existing (i.e. not deleted yet) contacts.
-    contacts = []
-    for cur_query in queries:
-        if cur_query.type == 'add':
-            # if we already have contact with such number,
-            # we should rewrite contact's name
-            for contact in contacts:
-                if contact.number == cur_query.number:
-                    contact.name = cur_query.name
-                    break
-            else: # otherwise, just add it
-                contacts.append(cur_query)
-        elif cur_query.type == 'del':
-            for j in range(len(contacts)):
-                if contacts[j].number == cur_query.number:
-                    contacts.pop(j)
-                    break
+#def process_queries(queries):
+#    result = []
+#    contacts = []
+#    for cur_query in queries:
+#        if cur_query.type == 'add':
+#            for contact in contacts:
+#                if contact.number == cur_query.number:
+#                    contact.name = cur_query.name
+#                    break
+#            else:
+#                contacts.append(cur_query)
+#        elif cur_query.type == 'del':
+#            for j in range(len(contacts)):
+#                if contacts[j].number == cur_query.number:
+#                    contacts.pop(j)
+#                    break
+#        else:
+#            response = 'not found'
+#            for contact in contacts:
+#                if contact.number == cur_query.number:
+#                    response = contact.name
+#                    break
+#            result.append(response)
+#    return result
+
+
+phonBkContacts = {};
+n = int(input());
+
+for i in range(n):
+    inputQuery = input().split();
+    inpt = inputQuery[0];
+    if inpt == 'add':
+        phonBkContacts[inputQuery[1]] = inputQuery[2];
+
+    elif inpt == 'del':
+        if inputQuery[1] in phonBkContacts:
+            del phonBkContacts[inputQuery[1]];
+
+    elif inpt == 'find':
+        if inputQuery[1] in phonBkContacts:
+            print(phonBkContacts[inputQuery[1]]);
+
         else:
-            response = 'not found'
-            for contact in contacts:
-                if contact.number == cur_query.number:
-                    response = contact.name
-                    break
-            result.append(response)
-    return result
+            print("not found");
 
-if __name__ == '__main__':
-    write_responses(process_queries(read_queries()))
+#if __name__ == '__main__':
+#    write_responses(process_queries(read_queries()))
 
+   # 221RDB386 Mārtiņš Nikiforovs 11.grupa
